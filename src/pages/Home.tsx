@@ -5,18 +5,23 @@ import ReposTable from "../components/Repos";
 import { Paginator } from "../components/Paginator";
 import Flex from "../components/Flex";
 import Loader from "../components/Loader";
+import styled from "styled-components";
 
 export default function Home() {
   const { loading } = useContext(Context);
   return (
-    <React.Fragment>
+    <StyledHome>
       <Search />
       <Flex>{loading ? <Loader /> : <ReposTable />}</Flex>
       <Paginator />
-    </React.Fragment>
+    </StyledHome>
   );
 }
 
-// "https://api.github.com/search/repositories?q=stars:>1000&per_page=10"
-// `https://api.github.com/search/repositories?q=${value}&page=10&per_page=10&sort=stars`
-// `https://api.github.com/users/${name}/repos?per_page=7`
+const StyledHome = styled.div`
+  border: 1px solid red;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;

@@ -10,12 +10,10 @@ function App() {
     <ContextProvider>
       <BrowserRouter>
         <Navbar />
-        <div className="">
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/repo/:id" component={RepoCard} />
-          </Switch>
-        </div>
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/repo/:id" component={RepoCard} />
+        </Switch>
       </BrowserRouter>
     </ContextProvider>
   );

@@ -7,12 +7,15 @@ interface IButton {
 }
 
 const Button = ({ children, onClick }: IButton) => (
-  <button onClick={onClick}>{children}</button>
+  <StyledButton onClick={onClick}>{children}</StyledButton>
 );
 
-const StyledButton = styled(Button)`
+const StyledButton = styled.button`
   color: white;
   background-color: blue;
+  margin: 0 8px;
+  padding: 4px 8px;
+  border-radius: 4px;
 `;
 
-export default StyledButton;
+export default Button;

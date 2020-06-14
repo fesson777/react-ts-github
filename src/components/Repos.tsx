@@ -1,39 +1,37 @@
 import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../context";
+import Table from "./Table";
 
 interface IReposTableProps {}
 
 export default function ReposTable() {
   const { repos } = useContext(Context);
 
-  useEffect(() => {
-    // console.log("ReposTable -> repos", repos);
-  }, []);
   return (
     <>
       {repos.length && (
-        <table>
-          <tbody>
+        <Table>
+          <thead>
             <tr>
               <th>Repo name</th>
               <th>Stars</th>
               <th>Last update</th>
               <th>link to repo</th>
             </tr>
+          </thead>
+          <tbody>
             {repos.map((repo) => {
               return (
-                <tr className="repo-tr" key={repo.id}>
-                  <td className="repo repo-td-link ">
+                <tr key={repo.id}>
+                  <td className="link ">
                     <Link to={`/repo/${repo.id}`}>
                       {repo.owner.login}/{repo.name}
                     </Link>
                   </td>
-                  <td className="repo repo-td">{repo.stargazers_count}</td>
-                  <td className="repo repo-td">
-                    {new Date(repo.updated_at).toLocaleString("ru")}
-                  </td>
-                  <td className="repo repo-td">
+                  <td>{repo.stargazers_count}</td>
+                  <td>{new Date(repo.updated_at).toLocaleString("ru")}</td>
+                  <td>
                     <a
                       href={repo.html_url}
                       target="_blank"
@@ -46,7 +44,7 @@ export default function ReposTable() {
               );
             })}
           </tbody>
-        </table>
+        </Table>
       )}
     </>
   );

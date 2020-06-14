@@ -1,19 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 
-function Loader() {
+export default function Loader() {
   return (
-    <div>
+    <StyledLoader>
       <p>Загрузка...</p>
-    </div>
+    </StyledLoader>
   );
 }
-export default styled(Loader)`
-div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+const StyledLoader = styled.div`
+  margin: 0 auto;
+  p {
+    text-align: center;
     color: red;
-}
-`
+    font-size: 24px;
+  }
+`;

@@ -1,10 +1,24 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
 body {
+  height: 100%;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+#root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 code {
@@ -31,24 +45,6 @@ code {
   cursor: pointer;
   color: white;
 }
-.repo-td {
-  padding-left: 10px;
-  font-size: 18px;
-}
-
-.repo-td > a {
-  text-decoration: none;
-}
-.repo {
-  padding: 4px 50px;
-}
-
-th,
-td {
-  border-bottom: 1px solid black;
-  border-collapse: collapse;
-}
-
 .nav-search {
   margin-left: 20px;
   cursor: default;
@@ -70,30 +66,10 @@ td {
   margin-right: 10px;
 }
 .c-input input:focus {
-  border: 1px solid green;
+  border: 2px solid rgb(1, 250, 1);
 }
 .c-filter {
   flex: 0 1 50%;
-}
-
-.paginator {
-  margin-top: 30px;
-  text-align: center;
-}
-.paginator span {
-  color: black;
-
-  padding: 8px 16px;
-  text-decoration: none;
-}
-
-.paginator span.active {
-  background-color: #4caf50;
-  color: white;
-}
-
-.paginator span:hover:not(.active) {
-  background-color: #ddd;
 }
 
 .repo-td-link:hover {

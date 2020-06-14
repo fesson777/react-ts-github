@@ -2,6 +2,7 @@ import React, { MouseEvent } from "react";
 import styled from "styled-components";
 // import { per_page } from "../const";
 import clsx from "clsx";
+import "../assets/pager.css";
 
 interface SpanElement extends HTMLSpanElement {
   id: string;
