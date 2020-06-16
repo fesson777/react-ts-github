@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../context";
 import Table from "./Table";
@@ -24,7 +24,7 @@ export default function ReposTable() {
             {repos.map((repo) => {
               return (
                 <tr key={repo.id}>
-                  <td className="link ">
+                  <td className="link">
                     <Link to={`/repo/${repo.id}`}>
                       {repo.owner.login}/{repo.name}
                     </Link>

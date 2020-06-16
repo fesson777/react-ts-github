@@ -9,6 +9,7 @@ export default styled.table`
       th {
         text-align: left;
         padding: 4px 0 4px 10px;
+        border-bottom: 2px solid black;
       }
     }
   }
@@ -20,8 +21,12 @@ export default styled.table`
         font-size: 18px;
         a {
           text-decoration: none;
+          color: black;
         }
       }
     }
+  }
+  .link:hover {
+    background-color: #e8e8e8;
   }
 `;

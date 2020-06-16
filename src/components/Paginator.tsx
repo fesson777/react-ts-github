@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Context } from "../context";
 import Pager from "./Pager";
@@ -11,15 +11,12 @@ type PaginationMap = {
 export const Paginator = () => {
   const { headers, getRepos } = useContext(Context);
   const [map, setMap] = useState<PaginationMap>({});
-  // const lastPage = useRef(1);
-  // const currentPage = useRef(1);
-  // const pages = useRef(1);
+
   const [pagerParams, setPagerParams] = useState({
     lastPage: 1,
     currentPage: 1,
     pages: 1,
   });
-  console.log("Paginator -> pagerParams", pagerParams);
 
   const { pathname } = useLocation();
 
@@ -68,12 +65,10 @@ export const Paginator = () => {
 
       setMap(obj);
       setPagerParams((state) => ({ ...state, lastPage, pages, currentPage }));
-      console.log("Paginator -> obj", obj);
     }
   }, [headers]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handlePagerClick = (page: string | number) => {
-    console.log("handlePagerClick -> page", page);
     let { currentPage, lastPage } = pagerParams;
     if (typeof page === "string") {
       if (page === "first") {
@@ -98,7 +93,6 @@ export const Paginator = () => {
         const q = url.slice(index + 1, -1);
         window.history.pushState(null, "", `${pathname}?${q}`);
         getRepos(q);
-        console.log("handlePagerClick -> q-text", q);
       }
     } else if (typeof page === "number") {
       currentPage = page;
@@ -124,10 +118,8 @@ export const Paginator = () => {
       window.history.pushState(null, "", `${pathname}?${q}`);
       getRepos(q);
       setPagerParams((state) => ({ ...state, currentPage }));
-      console.log("handlePagerClick -> q-number", q);
     }
   };
-
   return (
     <Pager
       pages={pagerParams.pages}

@@ -78,8 +78,12 @@ export const Search = () => {
           onChange={handleChange}
           onKeyPress={handleKeyPress}
         />
-        <Button onClick={handleClick}>Поиск</Button>
-        <Button onClick={handleClear}>Сбросить фильтр</Button>
+        <Button variant="primary" onClick={handleClick} type="button">
+          Поиск
+        </Button>
+        <Button variant="secondary" onClick={handleClear}>
+          Сбросить фильтр
+        </Button>
       </div>
     </div>
   );

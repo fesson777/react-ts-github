@@ -1,4 +1,4 @@
-import { GET_REPOS, GET_USER, SET_LOADING } from "./types";
+import { GET_REPOS, GET_CONTR, SET_LOADING } from "./types";
 
 type Action = {
   type: string;
@@ -18,12 +18,12 @@ const handlers: IHandlers = {
     headers: action.payload.headers,
     loading: false,
   }),
-  [GET_USER]: (state, action) => ({
+  [GET_CONTR]: (state, action) => ({
     ...state,
-    user: action.payload,
+    users: action.payload,
     loading: false,
   }),
-  [SET_LOADING]: (state) => ({ ...state, loading: true }),
+  [SET_LOADING]: (state, action) => ({ ...state, loading: action.payload }),
   DEFAULT: (state) => state,
 };
 

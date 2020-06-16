@@ -19,7 +19,6 @@ export default function Home() {
 }
 
 const StyledHome = styled.div`
-  border: 1px solid red;
   flex-grow: 1;
   display: flex;
   flex-direction: column;

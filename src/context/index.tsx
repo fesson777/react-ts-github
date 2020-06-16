@@ -1,14 +1,21 @@
 import React, { useReducer, createContext, ReactNode } from "react";
 import { reducer } from "./reducer";
 import axios from "axios";
-import { GET_USER, GET_REPOS, SET_LOADING } from "./types";
+import { GET_CONTR, GET_REPOS, SET_LOADING } from "./types";
 import { Repo } from "../interfaces";
 
+type User = {
+  login: string;
+  id: number;
+  node_id: string;
+  avatar_url: string;
+};
+
 interface IContextValue {
-  setLoading: () => void;
+  setLoading: (loading: boolean) => void;
   getRepos: (query: string) => void;
-  getUser: (name: string) => void;
-  user: Obj;
+  getContributors: (repoName: string, login: string) => void;
+  users: Array<User>;
   loading: boolean;
   repos: Repo[];
   headers: {
@@ -23,7 +30,7 @@ interface IContextProvider {
 }
 
 type State = {
-  user: Obj;
+  users: Array<{}>;
   repos: Repo[];
   loading: boolean;
   headers: {
@@ -33,7 +40,7 @@ type State = {
 
 export const ContextProvider = ({ children }: IContextProvider) => {
   const initialState: State = {
-    user: {},
+    users: [],
     loading: false,
     repos: [],
     headers: {
@@ -43,11 +50,12 @@ export const ContextProvider = ({ children }: IContextProvider) => {
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const setLoading = () => dispatch({ type: SET_LOADING });
+  const setLoading = (loading: boolean) =>
+    dispatch({ type: SET_LOADING, payload: loading });
 
   const getRepos = async (query: string) => {
     // console.log("getRepos -> query", query);
-    setLoading();
+    setLoading(true);
 
     const response = await axios.get(
       `https://api.github.com/search/repositories?${query}`
@@ -64,24 +72,37 @@ export const ContextProvider = ({ children }: IContextProvider) => {
     });
   };
 
-  const getUser = async (name: string) => {
-    setLoading();
-    const response = await axios.get(`https://api.github.com/users/${name}`);
-    dispatch({
-      type: GET_USER,
-      payload: response.data,
-    });
+  const getContributors = async (repoName: string, login: string) => {
+    setLoading(true);
+
+    try {
+      const response = await axios.get(
+        `https://api.github.com/repos/${repoName}/${login}/contributors`
+      );
+      dispatch({
+        type: GET_CONTR,
+        payload: response.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: GET_CONTR,
+        payload: [],
+      });
+
+      setLoading(false);
+      console.error("getContributors -> error", error);
+    }
   };
 
-  const { user, loading, repos, headers } = state;
+  const { users, loading, repos, headers } = state;
 
   return (
     <Context.Provider
       value={{
         setLoading,
         getRepos,
-        getUser,
-        user,
+        getContributors,
+        users,
         loading,
         repos,
         headers,

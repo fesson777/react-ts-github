@@ -1,6 +1,5 @@
 import React, { MouseEvent } from "react";
 import styled from "styled-components";
-// import { per_page } from "../const";
 import clsx from "clsx";
 import "../assets/pager.css";
 
@@ -15,7 +14,6 @@ interface IPagerProps {
 }
 
 const Pager = ({ pages, currentPage, onClick }: IPagerProps) => {
-  console.log("Pager -> currentPage", currentPage);
   const handleClick = (e: MouseEvent<SpanElement>) => {
     const id = (e.target as SpanElement).id;
 

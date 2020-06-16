@@ -5,4 +5,5 @@ export type Repo = {
   html_url: string;
   stargazers_count: number;
   owner: Obj;
+  language: string;
 };

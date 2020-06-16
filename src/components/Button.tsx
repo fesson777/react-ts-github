@@ -1,21 +1,31 @@
-import React, { ReactNode } from "react";
+import React, { ButtonHTMLAttributes } from "react";
 import styled from "styled-components";
 
-interface IButton {
-  children: ReactNode;
-  onClick: () => void;
+interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: "primary" | "secondary";
 }
 
-const Button = ({ children, onClick }: IButton) => (
-  <StyledButton onClick={onClick}>{children}</StyledButton>
+const Button = ({ children, variant, ...props }: IButtonProps) => (
+  <button {...props}>{children}</button>
 );
 
-const StyledButton = styled.button`
+export default styled(Button)<IButtonProps>`
   color: white;
-  background-color: blue;
+  background-color: ${({ variant }) => {
+    if (variant === "primary") {
+      return "blue";
+    }
+    if (variant === "secondary") {
+      return "grey";
+    }
+    return "black";
+  }};
   margin: 0 8px;
-  padding: 4px 8px;
-  border-radius: 4px;
+  padding: 8px 12px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  &:hover {
+    outline: 1px solid black;
+  }
 `;
-
-export default Button;
